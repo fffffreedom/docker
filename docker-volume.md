@@ -6,12 +6,12 @@ Docker镜像是由多个文件系统（只读层）叠加而成。当我们启�
 为了能够保存（持久化）数据以及共享容器间的数据，Docker提出了Volume的概念。简单来说，Volume就是目录或者文件，它可以绕过默认的联合文件系统，而以正常的文件或者目录的形式存在于宿主机上。
 ## volume command
 |Command|Description|
-|-------|:----------|
-| docker volume create | Create a volume |
-| docker volume inspect | Display detailed information on one or more volumes |
-| docker volume ls	| List volumes |
-| docker volume prune | Remove all unused volumes |
-| docker volume rm	| Remove one or more volumes |
+|:-------|:----------|
+|docker volume create|Create a volume |
+|docker volume inspect|Display detailed information on one or more volumes|
+|docker volume ls|List volumes|
+|docker volume prune|Remove all unused volumes|
+|docker volume rm|Remove one or more volumes|
 ## volume挂载
 ```
 man docker run
@@ -29,7 +29,9 @@ docker run [-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]] ......
 # docker inspect -f {{.Mounts}} container-test
 [{dffd4eda5cd05131824cd99efea48c47fcb0489a169d4e12c8bf399a3f00fc57 /var/lib/docker/volumes/dffd4eda5cd05131824cd99efea48c47fcb0489a169d4e12c8bf399a3f00fc57/_data /data local  true }]
 ```
-从输出可见，主机的`/var/lib/docker/volumes/dffd4eda5cd05131824cd99efea48c47fcb0489a169d4e12c8bf399a3f00fc57/_data`目录会挂载到了容器中。我们在主机的目录中创建一个文件：
+从输出可见，docker会在主机中创建一个临时目录会，并将其挂载到了容器：  
+`/var/lib/docker/volumes/dffd4eda5cd05131824cd99efea48c47fcb0489a169d4e12c8bf399a3f00fc57/_data`  
+我们在主机的目录中创建一个文件：  
 ```
 # touch /var/lib/docker/volumes/dffd4eda5cd05131824cd99efea48c47fcb0489a169d4e12c8bf399a3f00fc57/_data/host-to-container
 ```
