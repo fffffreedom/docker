@@ -40,7 +40,7 @@ docker run [-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]] ......
 / # ls /data
 host-to-container
 ```
-可见主机和容器的目录是同步的。此种方法，主机上的目录是临时创建的，我们可以指定主机上的具体目录，将其挂载到容器中：
+可见主机和容器的目录是同步的。在不指定主机挂载目录时，docker会在主机上创建一个临时文件，并将其挂载到容器中：  
 ```
 # docker run --rm -it --name container-test -h CONTAINER -v /data:/data busybox /bin/sh
 / # ls /data
