@@ -40,7 +40,7 @@ docker run [-v|--volume[=[[HOST-DIR:]CONTAINER-DIR[:OPTIONS]]]] ......
 / # ls /data
 host-to-container
 ```
-可见主机和容器的目录是同步的。在不指定主机挂载目录时，docker会在主机上创建一个临时文件，并将其挂载到容器中：  
+可见主机和容器的目录是同步的。在指定了主机volome目录时，docker会把直接挂载到容器中：  
 ```
 # docker run --rm -it --name container-test -h CONTAINER -v /data:/data busybox /bin/sh
 / # ls /data
@@ -69,7 +69,7 @@ Removing intermediate container 10fc5a8bdcf4
 [{9e34c16e1db8420b72987a83d89b975839c504f03b64b912d86e7d44d77ec34d /var/lib/docker/volumes/9e34c16e1db8420b72987a83d89b975839c504f03b64b912d86e7d44d77ec34d/_data /data local  true }]
 ```
 ## 数据共享
-
+如果要授权一个容器访问另一个容器的Volume，我们可以使用--volumes-from参数来执行docker run。  
 
 ## volume自动删除
 在v1.10.0版本之后，如果在挂载volume到容器时，指定了volume名，即-v name:/container/dir, 即使docker run指定了--rm标志，在容器退出时，也不会删除该volume。  
