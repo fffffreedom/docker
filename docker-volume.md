@@ -74,9 +74,15 @@ Removing intermediate container 10fc5a8bdcf4
 ## volume共享
 如果要授权一个容器访问另一个容器的Volume，我们可以使用--volumes-from参数来执行docker run。
 ```
-docker run --rm -it --name container-data  -v /data busybox /bin/sh
-docker run --rm -it --name container-app --from-volume container-data busybox /bin/sh
-
+# docker run --rm -it --name container-data  -v /data busybox /bin/sh
+/ # ls /data
+/ # 
+/ # touch /data/create-from-data
+# docker run --rm -it --name container-app --volumes-from container-data busybox /bin/sh
+/ # ls /data
+/ # 
+/ # ls /data/
+create-from-data
 ```
 
 ## volume删除
