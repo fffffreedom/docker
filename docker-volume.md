@@ -71,7 +71,7 @@ Removing intermediate container 10fc5a8bdcf4
 # docker inspect -f {{.Mounts}} 36f41025de1c
 [{9e34c16e1db8420b72987a83d89b975839c504f03b64b912d86e7d44d77ec34d /var/lib/docker/volumes/9e34c16e1db8420b72987a83d89b975839c504f03b64b912d86e7d44d77ec34d/_data /data local  true }]
 ```
-## volume共享
+## --volumes-from之volume共享
 如果要授权一个容器访问另一个容器的Volume，我们可以使用--volumes-from参数来执行docker run。
 ```
 # docker run --rm -it --name container-data  -v /data busybox /bin/sh
@@ -85,8 +85,25 @@ Removing intermediate container 10fc5a8bdcf4
 create-from-data
 ```
 在data容器里创建了一个文件，在app容器里就可以立即看到！  
-## 数据容器
-
+## --volumes-from之数据容器
+```
+# postgres docker hub
+https://hub.docker.com/_/postgres/
+# 
+# docker run --name dbdata postgres echo "Data-only container for postgres"
+# docker run -d --volumes-from dbdata --name db1 postgres
+```
+使用数据容器的两个注意点：  
+ - 不要运行数据容器，这纯粹是在浪费资源；（如上面运行的dbdata，它只echo了信息，就完成了，但volume并未删除）
+ - 不要为了数据容器而使用“最小的镜像”，如busybox或scratch，只使用数据库镜像本身就可以了。你已经拥有该镜像，所以并不需要占用额外的空间。
+## --volumes-from之数据备份
+下面的命令将/dbdata下面的数据压缩到/backup/目录下的一个tar包，在主机的$(pwd)目录就可以看到：  
+```
+docker run --rm --volumes-from dbdata -v $(pwd):/backup debian tar cvf /backup/backup.tar /dbdata
+```
 ## volume删除
-在v1.10.0版本之后，如果在挂载volume到容器时，指定了volume名，即-v /host/dir-or-file:/container/dir, 即使docker run指定了--rm标志，在容器退出时，也不会删除该volume。  
-https://github.com/moby/moby/pull/19568
+在v1.10.0版本之后，如果在挂载volume到容器时，指定了volume名，即-v /host-dir-or-file:/container-dir-or-file, 即使docker run指定了--rm标志，在容器退出时，也不会删除该volume。  
+https://github.com/moby/moby/pull/19568  
+Volume只有在下列情况下才能被删除（前提条件是挂载时省略了/host-dir-or-file:）：
+ - 该容器是用docker rm -v命令来删除的（-v是必不可少的）。
+ - docker run中使用了--rm参数
