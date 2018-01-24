@@ -151,7 +151,9 @@ Usage of docker-proxy:
 ## reference
 [1] Docker、Containerd、RunC...：你应该知道的所有  
 http://www.infoq.com/cn/news/2017/02/Docker-Containerd-RunC  
+[2] Docker Machine 和 Docker Engine 的区别  
 https://www.cnblogs.com/zhxshseu/p/a647de7065d3c19433c07b9355e50cd6.html  
+谈谈docker，containerd，runc，docker-shim之间的关系  
 http://blog.csdn.net/u013812710/article/details/79001463  
 Docker 架构之Daemon  
 http://blog.csdn.net/afandaafandaafanda/article/details/48649239  
