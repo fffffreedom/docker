@@ -82,3 +82,7 @@ OCI推出第1个Container技术映像档格式标准
 http://www.linuxidc.com/Linux/2016-05/131277.htm  
 Containerd：一个控制runC的守护进程  
 http://dockone.io/article/914  
+Container runtime in Docker v1.11  
+https://feisky.xyz/2016/04/28/Docker-1-11-Runtime/  
+OCI 和 runc：容器标准化和 docker  
+http://cizixs.com/2017/11/05/oci-and-runc  
