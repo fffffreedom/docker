@@ -46,7 +46,7 @@ and details the fields that enable the creation of a container.
 The execution environment is specified to ensure that applications running inside a container 
 have a consistent environment between runtimes along with common actions defined for the container's lifecycle.
 ## 标准的实现
-docker基于OCI运行时标准，实现了containerd和runc；  
+docker基于OCI的runtime-spec，实现了containerd和runc；  
 
 
 ## Reference
