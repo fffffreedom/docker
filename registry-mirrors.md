@@ -17,6 +17,14 @@ Docker Hub 上有数以十万计的各类 Docker 镜像。 在使用 Private Reg
 
 ## docker官方中国区mirror  
 --registry-mirror=https://registry.docker-cn.com  
+or 
+```
+# vim /etc/docker/daemon.json
+{
+        "registry-mirror":"https://registry.docker-cn.com"
+}
+```
+
 推荐程度： ★★★★★  
 
 ## 网易163 docker镜像
