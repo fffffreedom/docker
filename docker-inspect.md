@@ -36,7 +36,7 @@ docker inspect -f '{{with .State}} {{.Status}} {{end}}' 12a170ba0a76
 
 查看所有退出码不为0的容器：  
 ```
-docker inspect -f '{{if ne 0.0 .State.ExitCode }}{{.Name}} {{.State.ExitCode}} {{end}}' $(docker ps -aq)
+docker inspect -f '{{if ne 0.0 .State.ExitCode}} {{.Name}} {{.State.ExitCode}} {{end}}' $(docker ps -aq)
 ```
 
 ## 参考
@@ -46,3 +46,4 @@ http://88250.b3log.org/docker-inspect-template-magic-chinese
 
 go template package  
 https://golang.org/pkg/text/template/  
+https://wizardforcel.gitbooks.io/golang-stdlib-ref/content/121.html  
