@@ -10,6 +10,6 @@ INSECURE_REGISTRY='--insecure-registry=docker-hostname'
 
 ### Ubuntu 14.04.2
 ```
-vi /etc/default/docker
+vim /etc/default/docker
 DOCKER_OPTS="--insecure-registry=docker-hostname"
 ```
