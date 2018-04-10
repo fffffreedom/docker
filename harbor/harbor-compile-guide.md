@@ -56,6 +56,8 @@ make install GOBUILDIMAGE=golang:1.7.3 COMPILETAG=compile_golangimage CLARITYIMA
 ```
 
 - 编译单个镜像  
+
+若只改了某个镜像的代码，可以只编译单个镜像（需要手动go get依赖的pkg，如beego等）：  
 ```
 #!/bin/sh
 
