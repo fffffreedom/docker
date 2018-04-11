@@ -21,3 +21,9 @@ cat dockerfile | docker build -f /path/to/dockfile -t fffffreedom/centos:1.0.0 -
 ```
 
 ### tips
+
+#### 减小image size的方法
+
+```
+yum clean all
+```
