@@ -26,14 +26,26 @@ http://blog.163yun.com/archives/1402
 - 提取动态链接的 .so 文件（效果很好，使用ldd工具查看依赖的so文件，将其拷贝到镜像中）
 - 选用更合适的开发语言，比如GO（见《7 步精简 Docker 镜像》）
 
-## ENTRYPOINT & CMD & RUN
+## CMD & RUN
 
 - CMD指定一个容器启动时要运行的命令，RUN则是构建镜像时运行的命令；
+
+## CMD
+
 - 每个dockerfile可以有多个CMD，但只有最后一个有效；  
 - CMD可以被docker run指定的命令覆盖；
 - CMD可以有两种写法：CMD ["ls", "-l"] or CMD ls -l，使用前者，后者等价于CMD ["/bin/sh" "-c" "ls -l"]；  
 
-- ENTRYPOINT
+## ENTRYPOINT & CMD
+
+- CMD可以被docker run指定的命令覆盖，而ENTRYPOINT指定的命令则不会被覆盖(可以使用--entrypoint标志来覆盖)；  
+- docker run的参数会被当作ENTRYPOINT指定命令的参数；
+- ENTRYPOINT语法：ENTRYPOINT ["ls", "-l"]
+- ENTRYPOINT和CMD一起使用，前者指定命令，后者指定参数，在docker run时不指定命令和参数，就会使用默认的：  
+```
+ENTRYPOINT ["ls"]
+CMD ["-la"]
+```
 
 ## 编译命令
 ```
