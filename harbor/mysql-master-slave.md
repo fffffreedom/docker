@@ -8,8 +8,8 @@
 - name: copy file
   copy: src={{ item.src }} dest={{ item.dest }}
   with_items:
-   - src: mysql-rsyslog.conf
-     dest: /etc/rsyslog.d/
+   - src:
+     dest:
    ......
 ```
 
@@ -128,35 +128,3 @@
 log_bin = mysql-bin 
 server-id = {{ mysql_db_id }} 
 ```
-
-## mysql-rsyslog.conf
-
-mysql日志配置如下：
-
-```
-#  Rsyslog configuration file for docker.
-
-$ModLoad imtcp
-$InputTCPServerRun 514
-
-$ModLoad imudp
-$UDPServerRun 514
-
-template(name="DynaFile" type="string"
-    string="/var/log/harbor/%$now%/%syslogtag:R,ERE,0,DFLT:[^[]*--end:secpath-replace%.log"
-)
-#if $programname == "docker" then ?DynaFile
-if $programname != "rsyslogd" then -?DynaFile
-```
-
-```
-R,<regexp-type>,<submatch>,<nomatch>,<match-number>
-```
-
-template  
-https://www.rsyslog.com/doc/v8-stable/configuration/templates.html  
-https://www.rsyslog.com/doc/v8-stable/configuration/property_replacer.html  
-https://www.rsyslog.com/doc/v8-stable/configuration/nomatch.html  
-
-vip的配置说明   
-http://www.mamicode.com/info-detail-1777837.html  
